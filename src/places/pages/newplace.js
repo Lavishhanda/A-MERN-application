@@ -1,40 +1,40 @@
-import React, {useCallback, useReducer} from 'react';
+import React from "react";
 
-import Input from '../../Shared/Components/FormElements/Input';
-import Button from '../../Shared/Components/FormElements/Button';
+import Input from "../../Shared/Components/FormElements/Input";
+import Button from "../../Shared/Components/FormElements/Button";
 import {
+  VALIDATOR_MINLENGTH,
   VALIDATOR_REQUIRE,
-  VALIDATOR_MINLENGTH
-} from '../../Shared/Util/validators';
-import {useForm} from '../../Shared/hooks/form-hook';
-import './PlaceForm.css';
+} from "../../Shared/Util/validators";  
+import {useForm} from "../../Shared/hooks/form-hook"
+import "./PlaceForm.css";
 
 const NewPlace = () => {
-  const [formState, inputHandler] = useForm(
-    {
-      title: {
-        value: '',
-        isValid: false
-      },
-      description: {
-        value: '',
-        isValid: false
-      },
-      address: {
-        value: '',
-        isValid: false
-      }
+  const [formState, inputHandler] = useForm( {
+    title: {
+      value: "",
+      isValid: false,
     },
-    false
-  );
+    description: {
+      value: "",
+      isValid: false,
+    },
+    address: {
+      value: "",
+      isValid: false,
+    },
+  }, false);
 
-  const placeSubmitHandler = event => {
+ 
+
+  const placeSubmitHandler = event =>{
     event.preventDefault();
-    console.log(formState.inputs); // send this to the backend!
-  };
+    console.log(formState.inputs);
+  }
+  
 
   return (
-    <form className="place-form" onSubmit={placeSubmitHandler}>
+    <form className="place-form"  onSubmit={placeSubmitHandler}>
       <Input
         id="title"
         element="input"
@@ -54,10 +54,10 @@ const NewPlace = () => {
       />
       <Input
         id="address"
-        element="input"
+        element="textarea"
         label="Address"
         validators={[VALIDATOR_REQUIRE()]}
-        errorText="Please enter a valid address."
+        errorText="Please enter a valid address"
         onInput={inputHandler}
       />
       <Button type="submit" disabled={!formState.isValid}>
